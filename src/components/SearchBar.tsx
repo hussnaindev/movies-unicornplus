@@ -1,5 +1,6 @@
-"use client"
+"use client";
 import { FormEvent, useState } from "react";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { FaSearch } from "react-icons/fa";
 
 interface SearchBarProps {
@@ -8,11 +9,12 @@ interface SearchBarProps {
 
 const SearchBar = () => {
   const [query, setQuery] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log('query: ', query);
-    if(query) {
+    if (query) {
+      setLoading(true); // Set loading to true when search starts
       window.location.href = `/movies?q=${encodeURIComponent(query)}`;
     }
   };
@@ -26,12 +28,16 @@ const SearchBar = () => {
       <input
         type="text"
         value={query}
-        onChange={(e) => {
-          setQuery(e.target.value); // Update the state
-        }}
+        onChange={(e) => setQuery(e.target.value)}
         className="bg-transparent text-white placeholder-gray-300 focus:outline-none text-sm"
         placeholder="Search movies..."
       />
+      {loading && (
+        <AiOutlineLoading3Quarters
+          className="text-white text-lg animate-spin ml-2"
+          title="Loading"
+        />
+      )}
     </form>
   );
 };

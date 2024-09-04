@@ -14,18 +14,31 @@ type PageParams = {
   searchParams: {}
 }
 
-const page = async ({params}: PageParams) => {
+const page = async ({ params }: PageParams) => {
   const moviesService = new MoviesService();
   const movieId = Number(params.id);
-  const movie = await moviesService.fetchMovieDetails(movieId);
-  const cast = await moviesService.fetchMovieCast(movieId);
-  const maleCast = cast.filter(actor => actor.gender == 2)
-  const trailer = await moviesService.fetchTrailer(movieId);
-  const streamingPlatforms = await moviesService.fetchWatchProviders(movieId);
-  const reviews = await moviesService.fetchMovieReviews(movieId);
-  const similarMovies = await moviesService.fetchSimilarMovies(movieId);
+
+  // Use Promise.all to fetch all data concurrently
+  const [
+    movie,
+    cast,
+    trailer,
+    streamingPlatforms,
+    reviews,
+    similarMovies
+  ] = await Promise.all([
+    moviesService.fetchMovieDetails(movieId),
+    moviesService.fetchMovieCast(movieId),
+    moviesService.fetchTrailer(movieId),
+    moviesService.fetchWatchProviders(movieId),
+    moviesService.fetchMovieReviews(movieId),
+    moviesService.fetchSimilarMovies(movieId)
+  ]);
+
+  const maleCast = cast.filter(actor => actor.gender === 2);
   const moviesItems: MovieListItem[] = similarMovies.map(extractMovieShortInfo);
   const moviesWithImages: MovieListItem[] = moviesItems.filter(movie => movie.img);
+
   return (
     <main>
       <HeroSection
@@ -35,10 +48,10 @@ const page = async ({params}: PageParams) => {
         plot={movie?.overview || ''}
         trailer={trailer || ''}
       />
-      <StreamingPlatformsSection  platforms={streamingPlatforms?.results.US.buy || []}/>
-      <ActorCarousel actors={maleCast}/>
-      <MovieReviews reviews={reviews}/>
-      <SimilarMovies movies={moviesWithImages}/>
+      {streamingPlatforms?.results.US && <StreamingPlatformsSection platforms={streamingPlatforms?.results.US.buy || []} />}
+      <ActorCarousel actors={maleCast} />
+      <MovieReviews reviews={reviews} />
+      <SimilarMovies movies={moviesWithImages} />
     </main>
   );
 };
