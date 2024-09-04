@@ -26,6 +26,16 @@ interface MovieCastResponse {
   cast: Actor[];
 }
 
+interface WatchProvidersResponse {
+  results: {
+    US: {
+      buy?: Array<{ provider_id: number; provider_name: string, display_priority: number, logo_path: string }>;
+      rent?: Array<{ provider_id: number; provider_name: string, display_priority: number, logo_path: string }>;
+      flatrate?: Array<{ provider_id: number; provider_name: string }>;
+    };
+  };
+}
+
 class MoviesService {
   private readonly apiKey: string;
   private readonly baseUrl: string;
@@ -174,6 +184,21 @@ class MoviesService {
       return [];
     }
   }
+
+    /**
+   * Fetch watch providers for a specific movie by ID.
+   * @param movieId The ID of the movie to retrieve watch providers for.
+   * @returns A promise that resolves to the watch providers details.
+   */
+    public async fetchWatchProviders(movieId: number): Promise<WatchProvidersResponse | null> {
+      try {
+        const response: AxiosResponse<WatchProvidersResponse> = await this.axiosInstance.get(`/movie/${movieId}/watch/providers`);
+        return response.data;
+      } catch (error) {
+        console.error(`Error fetching watch providers for movie ID ${movieId}:`, error);
+        return null;
+      }
+    }
 }
 
 export default MoviesService;

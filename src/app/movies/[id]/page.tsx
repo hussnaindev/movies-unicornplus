@@ -1,4 +1,5 @@
 import HeroSection from "@/components/heroSection/HeroSection";
+import StreamingPlatformsSection from "@/components/StreamingPlatforms";
 import MoviesService from "@/services/MoviesService";
 
 type PageParams = {
@@ -13,6 +14,8 @@ const page = async ({params}: PageParams) => {
   const movie = await new MoviesService().fetchMovieDetails(movieId);
   const cast = await new MoviesService().fetchMovieCast(movieId);
   const trailer = await new MoviesService().fetchTrailer(movieId);
+  const streamingPlatforms = await new MoviesService().fetchWatchProviders(movieId);
+  console.log("🚀 ~ page ~ streamingPlatforms:", streamingPlatforms?.results.US.rent)
 
   return (
     <div>
@@ -23,6 +26,7 @@ const page = async ({params}: PageParams) => {
         plot={movie?.overview || ''}
         trailer={trailer || ''}
       />
+      <StreamingPlatformsSection  platforms={streamingPlatforms?.results.US.buy || []}/>
     </div>
   );
 };
