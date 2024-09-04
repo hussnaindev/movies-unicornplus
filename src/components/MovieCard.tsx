@@ -1,5 +1,5 @@
 // components/MovieCard.tsx
-
+"use client"
 import React, { useState } from 'react';
 import { FaPlay, FaRegHeart } from 'react-icons/fa';
 import LoadingSpinner from './LoadingSpinner';
