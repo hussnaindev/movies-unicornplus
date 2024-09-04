@@ -17,14 +17,15 @@ const StreamingPlatformsSection: React.FC<StreamingPlatformsSectionProps> = ({ p
   const sortedPlatforms = [...platforms].sort((a, b) => a.display_priority - b.display_priority);
 
   return (
-    <div className="p-8 bg-gray-900 rounded-xl shadow-lg transform scale-100 transition-transform duration-300 ease-out">
+    <div className="p-8 bg-black rounded-xl shadow-lg transform scale-100 transition-transform duration-300 ease-out">
       <h3 className="text-2xl font-semibold mb-6 text-center text-white">Available Streaming Platforms</h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {sortedPlatforms.length > 0 ? (
           sortedPlatforms.map((platform) => (
             <div
               key={platform.provider_id}
-              className="flex flex-col items-center p-4 bg-gray-800 rounded-lg hover:bg-gray-700 transform hover:scale-110 transition-transform duration-300 ease-out"
+              className="flex flex-col items-center p-4 bg-black rounded-lg transform hover:scale-125 transition-transform duration-300 ease-out"
+              style={{}}
             >
               <div className="w-24 h-24 overflow-hidden flex items-center justify-center mb-4">
                 <img

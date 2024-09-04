@@ -36,6 +36,27 @@ interface WatchProvidersResponse {
   };
 }
 
+interface AuthorDetails {
+  name: string;
+  username: string;
+  avatar_path: string | null;
+  rating: number;
+}
+
+interface Review {
+  author: string;
+  author_details: AuthorDetails;
+  content: string;
+  created_at: string;
+  id: string;
+  updated_at: string;
+  url: string;
+}
+
+interface MovieReviewsResponse {
+  results: Review[];
+} 
+
 class MoviesService {
   private readonly apiKey: string;
   private readonly baseUrl: string;
@@ -199,6 +220,21 @@ class MoviesService {
         return null;
       }
     }
+
+      /**
+   * Fetch reviews for a specific movie by ID.
+   * @param movieId The ID of the movie to retrieve reviews for.
+   * @returns A promise that resolves to an array of reviews.
+   */
+  public async fetchMovieReviews(movieId: number): Promise<Review[]> {
+    try {
+      const response: AxiosResponse<MovieReviewsResponse> = await this.axiosInstance.get(`/movie/${movieId}/reviews`);
+      return response.data.results;
+    } catch (error) {
+      console.error(`Error fetching reviews for movie ID ${movieId}:`, error);
+      return [];
+    }
+  }
 }
 
 export default MoviesService;
