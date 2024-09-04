@@ -66,7 +66,7 @@ const HeroSection = ({ title, backgroundImage, plot, cast, trailer }: HeroSectio
 
         {/* Overlay and Content */}
         <div
-          className="absolute inset-0 top-[36rem] left-15 flex flex-col items-start p-8 z-10 transition-transform duration-500 ease-out"
+          className="absolute inset-0 left-15 flex flex-col items-start align-bottom  justify-end p-8 z-10 transition-transform duration-500 ease-out"
           onMouseEnter={(e) => {
             e.currentTarget.style.transform =
               "translateX(100px) scale(1.1)"; // Move right and scale up on hover
@@ -74,6 +74,7 @@ const HeroSection = ({ title, backgroundImage, plot, cast, trailer }: HeroSectio
           onMouseLeave={(e) => {
             e.currentTarget.style.transform = "translateX(0px) scale(1.0)"; // Reset on mouse leave
           }}
+          style={{maxWidth: '60vw', maxHeight: '50vh', alignSelf: 'end'}}
         >
           <div className="text-white flex items-center gap-4">
             <h1
