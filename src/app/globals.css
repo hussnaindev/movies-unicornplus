@@ -30,6 +30,13 @@ body::-webkit-scrollbar {
   display: none; /* For Chrome, Safari, and Opera */
 }
 
+main {
+  max-width: 100vw;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
 @keyframes slideInLeft {
     0% {
       transform: translateX(-50px);
