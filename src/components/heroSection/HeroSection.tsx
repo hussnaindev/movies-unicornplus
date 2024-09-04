@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
@@ -25,21 +25,15 @@ const HeroSection = ({ title, backgroundImage, plot, cast, trailer }: HeroSectio
       <Head>
         <style>
           {`@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');`}
-          {`@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@200&italic=1&display=swap')`}
+          {`@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@200&italic=1&display=swap');`}
         </style>
       </Head>
       <div
         className="relative w-full h-screen bg-cover bg-center transform transition-transform duration-500 group"
-        style={{ 
+        style={{
           backgroundImage: `url(${backgroundImage})`,
-          transform: 'rotateX(0deg) rotateY(0deg) scale(1.1)',
-          transition: 'transform 0.5s, box-shadow 0.5s', // Smooth transition
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1.2)'; // Tilt and scale effect on hover
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1.1)'; // Reset tilt and scale effect
+          transform: "rotateX(0deg) rotateY(0deg) scale(1.0)",
+          transition: "transform 0.5s, box-shadow 0.5s", // Smooth transition
         }}
       >
         {/* Background Video */}
@@ -52,29 +46,41 @@ const HeroSection = ({ title, backgroundImage, plot, cast, trailer }: HeroSectio
           allow="autoplay; encrypted-media"
           allowFullScreen
           className="absolute inset-0 w-full h-full object-cover"
-          style={{          transform: 'rotateX(0deg) rotateY(0deg) scale(1.22)',
-        }}
+          style={{
+            transform: "rotateX(0deg) rotateY(0deg) scale(1.4)",
+          }}
         ></iframe>
 
-        <div style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundColor: 'black',
-          opacity: 0.5, // 50% opacity
-          zIndex: 1, // Ensure overlay is on top of the image but behind the content
-        }} />
-        
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "black",
+            opacity: 0.5, // 50% opacity
+            zIndex: 1, // Ensure overlay is on top of the image but behind the content
+          }}
+        />
+
         {/* Overlay and Content */}
-        <div className="absolute inset-0 top-[28rem] left-60 flex flex-col items-start p-8 z-10">
+        <div
+          className="absolute inset-0 top-[36rem] left-15 flex flex-col items-start p-8 z-10 transition-transform duration-500 ease-out"
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform =
+              "translateX(100px) scale(1.1)"; // Move right and scale up on hover
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = "translateX(0px) scale(1.0)"; // Reset on mouse leave
+          }}
+        >
           <div className="text-white flex items-center gap-4">
             <h1
               className="text-4xl font-bold"
-              style={{ 
-                fontFamily: 'Montserrat Alternates, sans-serif',
-                textShadow: '0 0 10px rgba(255, 255, 255, 0.4)' 
+              style={{
+                fontFamily: "Montserrat Alternates, sans-serif",
+                textShadow: "0 0 10px rgba(255, 255, 255, 0.4)",
               }}
             >
               {title}
@@ -92,12 +98,12 @@ const HeroSection = ({ title, backgroundImage, plot, cast, trailer }: HeroSectio
           <p
             className="text-white mt-4 text-lg max-w-2xl"
             style={{
-              fontFamily: 'sans-serif',
-              fontStyle: 'italic',
+              fontFamily: "sans-serif",
+              fontStyle: "italic",
               fontWeight: 200, // ExtraLight weight
-              textShadow: '0 0 5px rgba(0, 0, 0, 0.8)',
-              lineHeight: '1.5',
-              fontSize: '1.125rem', // 18px, slightly larger than base
+              textShadow: "0 0 5px rgba(0, 0, 0, 0.8)",
+              lineHeight: "1.5",
+              fontSize: "1.125rem", // 18px, slightly larger than base
             }}
           >
             {plot}
@@ -105,7 +111,15 @@ const HeroSection = ({ title, backgroundImage, plot, cast, trailer }: HeroSectio
         </div>
 
         {/* Search Form */}
-        <div className="absolute z-10 top-24 right-48">
+        <div className="absolute z-10 top-7 right-10 transition-transform duration-500 ease-out"
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform =
+                      "translateX(-50px) scale(1.2)"; // Move right and scale up on hover
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = "translateX(0px) scale(1.0)"; // Reset on mouse leave
+                  }}
+        >
           <SearchBar />
         </div>
       </div>
