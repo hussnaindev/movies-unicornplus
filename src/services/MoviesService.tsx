@@ -235,6 +235,24 @@ class MoviesService {
       return [];
     }
   }
+
+    /**
+   * Fetch similar movies for a specific movie by ID.
+   * @param movieId The ID of the movie to retrieve similar movies for.
+   * @param page The page number to retrieve.
+   * @returns A promise that resolves to an array of similar movies.
+   */
+    public async fetchSimilarMovies(movieId: number, page: number = 1): Promise<Movie[]> {
+      try {
+        const response: AxiosResponse<{ results: Movie[] }> = await this.axiosInstance.get(`/movie/${movieId}/similar`, {
+          params: { page },
+        });
+        return response.data.results;
+      } catch (error) {
+        console.error(`Error fetching similar movies for movie ID ${movieId}:`, error);
+        return [];
+      }
+    }
 }
 
 export default MoviesService;

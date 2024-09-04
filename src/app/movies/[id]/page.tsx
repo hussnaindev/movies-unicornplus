@@ -1,8 +1,11 @@
 import ActorCarousel from "@/components/ActorCarousel";
 import HeroSection from "@/components/heroSection/HeroSection";
 import MovieReviews from "@/components/MovieReviewsSection";
+import SimilarMovies from "@/components/SimilarMovies";
 import StreamingPlatformsSection from "@/components/StreamingPlatforms";
 import MoviesService from "@/services/MoviesService";
+import { MovieListItem } from "../../../../types/movies/Movies";
+import { extractMovieShortInfo } from "../../../../utils/movieInfo";
 
 type PageParams = {
   params: {
@@ -12,16 +15,19 @@ type PageParams = {
 }
 
 const page = async ({params}: PageParams) => {
+  const moviesService = new MoviesService();
   const movieId = Number(params.id);
-  const movie = await new MoviesService().fetchMovieDetails(movieId);
-  const cast = await new MoviesService().fetchMovieCast(movieId);
+  const movie = await moviesService.fetchMovieDetails(movieId);
+  const cast = await moviesService.fetchMovieCast(movieId);
   const maleCast = cast.filter(actor => actor.gender == 2)
-  const trailer = await new MoviesService().fetchTrailer(movieId);
-  const streamingPlatforms = await new MoviesService().fetchWatchProviders(movieId);
-  const reviews = await new MoviesService().fetchMovieReviews(movieId);
-
+  const trailer = await moviesService.fetchTrailer(movieId);
+  const streamingPlatforms = await moviesService.fetchWatchProviders(movieId);
+  const reviews = await moviesService.fetchMovieReviews(movieId);
+  const similarMovies = await moviesService.fetchSimilarMovies(movieId);
+  const moviesItems: MovieListItem[] = similarMovies.map(extractMovieShortInfo);
+  const moviesWithImages: MovieListItem[] = moviesItems.filter(movie => movie.img);
   return (
-    <div>
+    <main>
       <HeroSection
         title={movie?.title || ''}
         cast={maleCast}
@@ -32,7 +38,8 @@ const page = async ({params}: PageParams) => {
       <StreamingPlatformsSection  platforms={streamingPlatforms?.results.US.buy || []}/>
       <ActorCarousel actors={maleCast}/>
       <MovieReviews reviews={reviews}/>
-    </div>
+      <SimilarMovies movies={moviesWithImages}/>
+    </main>
   );
 };
 

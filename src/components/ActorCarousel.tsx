@@ -37,7 +37,7 @@ const ActorCarousel = ({ actors }: { actors: Actor[] }) => {
         transition={{ duration: 20, ease: 'linear', repeat: isVisible ? Infinity : 0 }} // Loop if visible
       >
         {actors.concat(actors).map((actor) => ( // Duplicate actors for seamless effect
-          <div className="flex-shrink-0" key={actor.id}>
+          <div className="flex-shrink-0 cursor-pointer" key={actor.id}>
             <ActorCard name={actor.name} image={`https://image.tmdb.org/t/p/original/${actor.profile_path}`} />
           </div>
         ))}

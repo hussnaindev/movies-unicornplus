@@ -24,7 +24,7 @@ const StreamingPlatformsSection: React.FC<StreamingPlatformsSectionProps> = ({ p
           sortedPlatforms.map((platform) => (
             <div
               key={platform.provider_id}
-              className="flex flex-col items-center p-4 bg-black rounded-lg transform hover:scale-125 transition-transform duration-300 ease-out"
+              className="cursor-pointer flex flex-col items-center p-4 bg-black rounded-lg transform hover:scale-125 transition-transform duration-300 ease-out"
               style={{}}
             >
               <div className="w-24 h-24 overflow-hidden flex items-center justify-center mb-4">
