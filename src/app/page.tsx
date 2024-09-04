@@ -23,6 +23,7 @@ export default async function Page() {
       </head>
       <div className="hero-section">
         <HeroSection
+        id={movies[0].id}
           title={movies[0].title}
           backgroundImage={`https://image.tmdb.org/t/p/original/${movies[0]?.backdrop_path}`}
           plot={movies[0].overview}

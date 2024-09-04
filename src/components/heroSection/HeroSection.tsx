@@ -7,7 +7,7 @@ import { HeroSectionProps } from "../../../types/props/Props";
 import ActorDisplay from "../ActorDisplay";
 import SearchBar from "../SearchBar";
 
-const HeroSection = ({ title, backgroundImage, plot, cast, trailer }: HeroSectionProps) => {
+const HeroSection = ({ title, backgroundImage, plot, cast, trailer, id, genre, rating, language, releaseDate }: HeroSectionProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -66,7 +66,7 @@ const HeroSection = ({ title, backgroundImage, plot, cast, trailer }: HeroSectio
 
         {/* Overlay and Content */}
         <div
-          className="absolute inset-0 left-15 flex flex-col items-start align-bottom  justify-end p-8 z-10 transition-transform duration-500 ease-out"
+          className="absolute inset-0 left-15 flex flex-col items-start align-bottom justify-end p-8 z-10 transition-transform duration-500 ease-out"
           onMouseEnter={(e) => {
             e.currentTarget.style.transform =
               "translateX(100px) scale(1.1)"; // Move right and scale up on hover
@@ -87,13 +87,31 @@ const HeroSection = ({ title, backgroundImage, plot, cast, trailer }: HeroSectio
               {title}
             </h1>
 
-            <Link href={`/movies/1`}>
+            <Link href={`/movies/${id}`}>
               <button className="bg-white bg-opacity-20 border-2 border-white rounded-full w-14 h-14 flex items-center justify-center cursor-pointer hover:bg-opacity-50 transition-opacity duration-200">
                 <FaPlay className="text-2xl text-white" />
               </button>
             </Link>
           </div>
           {cast.length > 0 && <ActorDisplay cast={cast} />} {/* Pass cast data to ActorDisplay */}
+                    {/* Movie Details */}
+                    <div
+            className="text-white mt-4 flex items-center gap-5 text-sm"
+            style={{
+              fontFamily: "sans-serif",
+              fontWeight: 700,
+              fontSize: 16,
+              textShadow: "0 0 5px rgba(0, 0, 0, 0.8)",
+            }}
+          >
+            <span>{genre} Crime-Drama</span>
+            <span>•</span>
+            <span>{rating}9.4</span>
+            <span>•</span>
+            <span>{language} English </span>
+            <span>•</span>
+            <span>{new Date().toLocaleDateString()}</span>
+          </div>
 
           {/* Movie Plot */}
           <p
@@ -113,13 +131,13 @@ const HeroSection = ({ title, backgroundImage, plot, cast, trailer }: HeroSectio
 
         {/* Search Form */}
         <div className="absolute z-10 top-7 right-10 transition-transform duration-500 ease-out"
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform =
-                      "translateX(-50px) scale(1.2)"; // Move right and scale up on hover
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = "translateX(0px) scale(1.0)"; // Reset on mouse leave
-                  }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform =
+              "translateX(-50px) scale(1.2)"; // Move right and scale up on hover
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = "translateX(0px) scale(1.0)"; // Reset on mouse leave
+          }}
         >
           <SearchBar />
         </div>

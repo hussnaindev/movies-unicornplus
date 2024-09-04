@@ -34,7 +34,6 @@ const page = async ({ params }: PageParams) => {
     moviesService.fetchMovieReviews(movieId),
     moviesService.fetchSimilarMovies(movieId)
   ]);
-
   const maleCast = cast.filter(actor => actor.gender === 2);
   const moviesItems: MovieListItem[] = similarMovies.map(extractMovieShortInfo);
   const moviesWithImages: MovieListItem[] = moviesItems.filter(movie => movie.img);
@@ -42,16 +41,17 @@ const page = async ({ params }: PageParams) => {
   return (
     <main>
       <HeroSection
+        id={movie?.id || 0}
         title={movie?.title || ''}
         cast={maleCast}
         backgroundImage={`https://image.tmdb.org/t/p/original/${movie?.backdrop_path}`}
         plot={movie?.overview || ''}
         trailer={trailer || ''}
       />
-      {streamingPlatforms?.results.US && <StreamingPlatformsSection platforms={streamingPlatforms?.results.US.buy || []} />}
-      <ActorCarousel actors={maleCast} />
-      <MovieReviews reviews={reviews} />
-      <SimilarMovies movies={moviesWithImages} />
+      {streamingPlatforms?.results.US.buy?.length && <StreamingPlatformsSection platforms={streamingPlatforms?.results.US.buy || []} />}
+      {cast.length && <ActorCarousel actors={maleCast} />}
+      {reviews.length >= 1 && <MovieReviews reviews={reviews} />}
+      {similarMovies.length && <SimilarMovies movies={moviesWithImages} />}
     </main>
   );
 };
