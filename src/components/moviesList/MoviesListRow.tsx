@@ -20,6 +20,7 @@ const MoviesListRow: React.FC<MoviesListRowProps> = React.memo(({ movies, slideD
           title={movie.title}
           backgroundImage={movie.img}
           rating={movie.rating}
+          id={Number(movie.id)}
         />
       ))}
       </div>

@@ -6,6 +6,7 @@ export type HeroSectionProps = {
     backgroundImage: string;
     plot: string
     cast: Actor[],
+    trailer: string
 };
 
 export type TrendingSectionProps = {

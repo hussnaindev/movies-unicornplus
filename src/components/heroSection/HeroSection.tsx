@@ -7,7 +7,7 @@ import { HeroSectionProps } from "../../../types/props/Props";
 import ActorDisplay from "../ActorDisplay";
 import SearchBar from "../SearchBar";
 
-const HeroSection = ({ title, backgroundImage, plot, cast }: HeroSectionProps) => {
+const HeroSection = ({ title, backgroundImage, plot, cast, trailer }: HeroSectionProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -43,14 +43,18 @@ const HeroSection = ({ title, backgroundImage, plot, cast }: HeroSectionProps) =
         }}
       >
         {/* Background Video */}
-        {/* <video
-          ref={videoRef}
-          src="deadpool-teaser.mp4" // Replace with your local video path
-          autoPlay
-          muted
-          loop
-          className="absolute inset-0 w-full h-full object-cover z-0"
-        /> */}
+        <iframe
+          width="100%"
+          height="100%"
+          src={`https://www.youtube.com/embed/${trailer}?autoplay=1&mute=1&loop=1&playlist=${trailer}`} // Replace with your YouTube video ID
+          title="YouTube video player"
+          frameBorder="0"
+          allow="autoplay; encrypted-media"
+          allowFullScreen
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{          transform: 'rotateX(0deg) rotateY(0deg) scale(1.22)',
+        }}
+        ></iframe>
 
         <div style={{
           position: 'absolute',

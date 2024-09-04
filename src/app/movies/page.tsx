@@ -14,6 +14,7 @@ export default async function Page({ searchParams }: SearchPageProps) {
   const moviesItems: MovieListItem[] = movies.map(extractMovieShortInfo);
   const moviesWithImages: MovieListItem[] = moviesItems.filter(movie => movie.img);
   const cast = await moviesService.fetchMovieCast(movies[0].id);
+  const trailer = await moviesService.fetchTrailer(movies[0].id);
   
   return (
     <main>
@@ -28,6 +29,7 @@ export default async function Page({ searchParams }: SearchPageProps) {
         backgroundImage={`https://image.tmdb.org/t/p/original/${movies[0]?.backdrop_path}`}
         plot={movies[0].overview}
         cast={cast}
+        trailer={trailer || ''}
       />
       <MoviesList movies={moviesWithImages} />
     </main>

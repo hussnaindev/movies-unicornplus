@@ -9,6 +9,8 @@ export default async function Page() {
   const moviesItems: MovieListItem[] = movies.map(extractMovieShortInfo);
   const moviesWithImages: MovieListItem[] = moviesItems.filter(movie => movie.img);
   const cast = await new MoviesService().fetchMovieCast(movies[0].id);
+  const trailer = await new MoviesService().fetchTrailer(movies[0].id);
+  console.log('trailer', trailer );
 
   return (
     <main style={{ margin: 0, padding: 0, boxSizing: 'border-box' }}>
@@ -25,6 +27,7 @@ export default async function Page() {
           backgroundImage={`https://image.tmdb.org/t/p/original/${movies[0]?.backdrop_path}`}
           plot={movies[0].overview}
           cast={cast}
+          trailer={trailer || ''}
         />
       </div>
       <div className="movies-list">

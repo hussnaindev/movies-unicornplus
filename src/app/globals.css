@@ -37,6 +37,7 @@ main {
   flex-direction: column;
 }
 
+
 @keyframes slideInLeft {
     0% {
       transform: translateX(-50px);

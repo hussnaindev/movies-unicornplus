@@ -8,9 +8,10 @@ interface MovieCardProps {
   title: string;
   backgroundImage: string;
   rating: number;
+  id: number
 }
 
-const MovieCard: React.FC<MovieCardProps> = ({ title, backgroundImage, rating }) => {
+const MovieCard: React.FC<MovieCardProps> = ({ title, backgroundImage, rating, id }) => {
   console.log("🚀 ~ backgroundImage:", backgroundImage)
   const cardRef = useRef<HTMLDivElement>(null);
   
@@ -73,7 +74,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ title, backgroundImage, rating })
         </h2>
 
         {/* Play Button */}
-        <Link className="flex justify-center items-center h-full" href={'/movies/1'}>
+        <Link className="flex justify-center items-center h-full" href={`/movies/${id}`}>
           <button className="bg-white bg-opacity-30 rounded-full w-14 h-14 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <FaPlay className="text-2xl text-white" />
           </button>
