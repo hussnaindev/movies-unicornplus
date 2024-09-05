@@ -1,7 +1,9 @@
 import HeroSection from "@/components/heroSection/HeroSection";
 import MoviesList from "@/components/moviesList/MoviesList";
 import MoviesService from "@/services/MoviesService";
+import { GoogleAnalytics } from '@next/third-parties/google';
 import { moviesWithImages } from "../../utils/movie";
+
 
 export default async function Page() {
   const moviesService = new MoviesService();
@@ -37,6 +39,7 @@ export default async function Page() {
       <div className="movies-list">
         <MoviesList movies={moviesList.slice(1)} />
       </div>
+      <GoogleAnalytics gaId="G-BDX88Z8MCP" />
     </main>
   );
 }
