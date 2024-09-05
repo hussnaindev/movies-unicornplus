@@ -13,7 +13,6 @@ interface StreamingPlatformsSectionProps {
 }
 
 const   StreamingPlatformsSection: React.FC<StreamingPlatformsSectionProps> = ({ platforms }) => {
-    console.log("🚀 ~ platforms:", platforms)
     
   // Sort platforms by display_priority
   const sortedPlatforms = [...platforms].sort((a, b) => a.display_priority - b.display_priority);

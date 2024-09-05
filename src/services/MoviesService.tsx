@@ -130,7 +130,6 @@ class MoviesService {
    */
     public async searchMovies(query: string, page: number = 1): Promise<Movie[]> {
       try {
-        console.log('this api key: ', this.apiKey)
         const response: AxiosResponse<{ results: Movie[] }> = await this.axiosInstance.get('/search/movie', {
           params: { query, page },
         });

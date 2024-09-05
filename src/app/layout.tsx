@@ -5,8 +5,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "MoviesPlus",
-  description: "Movies streaming service",
+  title: "Movies UnicornPlus",
+  description: "All about movies",
 };
 
 export default function RootLayout({
