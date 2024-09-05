@@ -1,4 +1,5 @@
 "use client";
+import { Manrope } from "next/font/google";
 import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
@@ -6,6 +7,8 @@ import { FaPlay } from "react-icons/fa";
 import { HeroSectionProps } from "../../../types/props/Props";
 import ActorDisplay from "../ActorDisplay";
 import SearchBar from "../SearchBar";
+const manrope = Manrope({subsets: ['latin']})
+
 
 const HeroSection = ({ title, backgroundImage, plot, cast, trailer, id, genre, rating, language, releaseDate }: HeroSectionProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -115,11 +118,8 @@ const HeroSection = ({ title, backgroundImage, plot, cast, trailer, id, genre, r
 
           {/* Movie Plot */}
           <p
-            className="text-white mt-4 text-lg max-w-2xl"
+            className={`text-white mt-4 text-lg max-w-2xl ${manrope.className}`}
             style={{
-              fontFamily: "sans-serif",
-              fontStyle: "italic",
-              fontWeight: 200, // ExtraLight weight
               textShadow: "0 0 5px rgba(0, 0, 0, 0.8)",
               lineHeight: "1.5",
               fontSize: "1.125rem", // 18px, slightly larger than base
